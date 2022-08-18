@@ -7,19 +7,74 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('addPetToPetStore', (petId, petName, categoryName, photoUrl) => {
+    cy.request('POST', 'https://petstore.swagger.io/v2/pet', {
+        "id": petId,
+        "category": {
+            "id": 0,
+            "name": categoryName
+        },
+        "name": petName,
+        "photoUrls": [
+            photoUrl
+        ],
+        "tags": [
+            {
+                "id": 0,
+                "name": "string"
+            }
+        ],
+        "status": "available"
+    }).then((response) => {
+        expect(response.status).to.eq(200)
+        expect(response.body).to.have.property('name', petName)
+        expect(response.body).to.have.property('id', petId)
+    })
+})
+
+Cypress.Commands.add('deletePetFromPetStore', (petId) => {
+    cy.request('DELETE', 'https://petstore.swagger.io/v2/pet/' + petId).then((response) => {
+        expect(response.status).to.eq(200)
+    })
+})
+
+Cypress.Commands.add('findPetInPetStore', (petId, petName, categoryName) => {
+    cy.request('GET', 'https://petstore.swagger.io/v2/pet/' + petId).then((response) => {
+        expect(response.status).to.eq(200)
+        expect(response.body).to.have.property('name', petName)
+        expect(response.body).to.have.property('id', petId)
+        // expect(response.body).to.have.property('category/name', categoryName)
+    })
+})
+
+Cypress.Commands.add('updatePetInPetStore', (petId, petName, newCategoryName, photoUrl) => {
+    cy.request('PUT', 'https://petstore.swagger.io/v2/pet', {
+        "id": petId,
+        "category": {
+            "id": 0,
+            "name": newCategoryName
+        },
+        "name": petName,
+        "photoUrls": [
+            photoUrl
+        ],
+        "tags": [
+            {
+                "id": 0,
+                "name": "string"
+            }
+        ],
+        "status": "available"
+    }).then((response) => {
+        expect(response.status).to.eq(200)
+        expect(response.body).to.have.property('name', petName)
+        expect(response.body).to.have.property('id', petId)
+    })
+})
+
+Cypress.Commands.add('checkPetIsDeletedFromPetStore', (petId) => {
+    cy.request('GET', 'https://petstore.swagger.io/v2/pet/' + petId).then((response) => {
+        expect(response.status).to.eq(200)
+    })
+})
