@@ -19,12 +19,10 @@ Cypress.Commands.add('addPetToPetStore', (petId, petName, categoryName, photoUrl
         "photoUrls": [
             photoUrl
         ],
-        "tags": [
-            {
-                "id": 0,
-                "name": "string"
-            }
-        ],
+        "tags": [{
+            "id": 0,
+            "name": "string"
+        }],
         "status": "available"
     }).then((response) => {
         expect(response.status).to.eq(200)
@@ -44,7 +42,7 @@ Cypress.Commands.add('findPetInPetStore', (petId, petName, categoryName) => {
         expect(response.status).to.eq(200)
         expect(response.body).to.have.property('name', petName)
         expect(response.body).to.have.property('id', petId)
-        // expect(response.body).to.have.property('category/name', categoryName)
+            // expect(response.body).to.have.property('category/name', categoryName)
     })
 })
 
@@ -59,12 +57,10 @@ Cypress.Commands.add('updatePetInPetStore', (petId, petName, newCategoryName, ph
         "photoUrls": [
             photoUrl
         ],
-        "tags": [
-            {
-                "id": 0,
-                "name": "string"
-            }
-        ],
+        "tags": [{
+            "id": 0,
+            "name": "string"
+        }],
         "status": "available"
     }).then((response) => {
         expect(response.status).to.eq(200)
@@ -75,6 +71,12 @@ Cypress.Commands.add('updatePetInPetStore', (petId, petName, newCategoryName, ph
 
 Cypress.Commands.add('checkPetIsDeletedFromPetStore', (petId) => {
     cy.request('GET', 'https://petstore.swagger.io/v2/pet/' + petId).then((response) => {
+        expect(response.status).to.eq(200)
+    })
+})
+
+Cypress.Commands.add('findPetByStatus', (status) => {
+    cy.request('GET', 'https://petstore.swagger.io/v2/pet/findByStatus?status=' + status).then((response) => {
         expect(response.status).to.eq(200)
     })
 })
