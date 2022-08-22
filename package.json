@@ -1,0 +1,21 @@
+{
+  "name": "kpts-cypress",
+  "version": "1.0.0",
+  "description": "Cypress",
+  "main": "cypress.config.js",
+  "scripts": {
+    "cy:run:petstore": "cypress run --spec ./cypress/e2e/KPTS/NikolaN/petstore_api.cy.js --browser electron --headless",
+    "cy:run:swag": "cypress run --spec ./cypress/e2e/KPTS/NikolaN/swag_labs.cy.js --browser electron --headless"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikolanikic/KPTS-Cypress.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikolanikic/KPTS-Cypress/issues"
+  },
+  "homepage": "https://github.com/nikolanikic/KPTS-Cypress#readme"
+}
