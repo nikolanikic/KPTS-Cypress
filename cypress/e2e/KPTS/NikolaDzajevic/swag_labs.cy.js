@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-import loginPage from "../../../support/KPTS/NikolaN/loginPage"
-import productsPage from "../../../support/KPTS/NikolaN/productsPage"
+import loginPage from "../../../support/KPTS/NikolaDzajevic/loginPage"
+import productsPage from "../../../support/KPTS/NikolaDzajevic/productsPage"
 
 describe('Swag Lab', () => {
     const badUser = 'locked_out_user'
