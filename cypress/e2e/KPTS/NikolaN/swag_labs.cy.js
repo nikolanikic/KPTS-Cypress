@@ -14,7 +14,10 @@ describe('Swag Lab', () => {
     cy.visit('https://www.saucedemo.com/')
   })
 
+  
+
   it('Web page load properly and login form is displayed', () => {
+    cy.viewport('ipad-2')
     cy.get('.login_logo').should('be.visible')
     LoginPage.usernameField().should('be.visible')
     LoginPage.passwordField().should('be.visible')
@@ -22,6 +25,7 @@ describe('Swag Lab', () => {
   })
 
   it('Proper error message is displayed when locked out user login', () => {
+    cy.viewport('iphone-4')
     LoginPage.usernameField().type(badUser)
     LoginPage.passwordField().type(password)
     LoginPage.loginButton().click()
@@ -29,6 +33,7 @@ describe('Swag Lab', () => {
   })
 
   it('Standard User is able to login successfuly', () => {
+    cy.viewport('iphone-4')
     LoginPage.usernameField().type(goodUser)
     LoginPage.passwordField().type(password)
     LoginPage.loginButton().click()
